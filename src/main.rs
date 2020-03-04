@@ -1,7 +1,7 @@
-use std::{thread, time};
 use std::fs;
 use std::io::{BufReader, Read, Write};
-use std::path::{Path};
+use std::path::Path;
+use std::{thread, time};
 
 use dirs::config_dir;
 use discord_rpc_client::Client as DiscordClient;
@@ -79,7 +79,10 @@ fn main() {
     let config = load_config().unwrap().parse::<Value>().unwrap();
 
     let app_id = config["id"].as_integer().unwrap() as u64;
-    let hosts: &Vec<String> = &config["hosts"].as_array().unwrap().iter()
+    let hosts: &Vec<String> = &config["hosts"]
+        .as_array()
+        .unwrap()
+        .iter()
         .map(|val| val.as_str().unwrap().to_string())
         .collect();
 
@@ -97,11 +100,14 @@ fn main() {
             let title = song.title.unwrap();
             let album = song.tags.get("Album").unwrap_or(&EMPTY);
             let artist = song.tags.get("Artist").unwrap_or(&EMPTY);
+            let date = song.tags.get("Date").unwrap_or(&EMPTY);
 
             // set the activity
-            if let Err(why) = drpc.set_activity(|act| act.state(format!("{} / {}", artist, album))
-                .details(title)
-                .assets(|asset| asset.small_image("notes"))) {
+            if let Err(why) = drpc.set_activity(|act| {
+                act.state(format!("{}, {} ({})", artist, album, date))
+                    .details(title)
+                    .assets(|asset| asset.small_image("notes"))
+            }) {
                 println!("Failed to set activity: {}", why);
             };
         } else {
