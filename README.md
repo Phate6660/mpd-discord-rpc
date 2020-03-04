@@ -6,29 +6,15 @@ The program does not require MPD or Discord to be running in order to run.
 
 Once installed just run `mpd-discord-rpc`.
 
-![status](https://f.jstanger.dev/github/mpd-discord-rpc/status.png)
+![status](status.png)
 
 ## Installation
 
-### Cargo
-
-The cargo package can be found [here](https://crates.io/crates/mpd-discord-rpc).
-
 ```
-cargo install mpd-discord-rpc
+git clone https://github.com/Phate6660/mpd-discord-rpc
+cd mpd-discord-rpc
+cargo install --path .
 ```
-
-### Arch Linux
-
-The AUR package can be found [here](https://aur.archlinux.org/packages/mpd-discord-rpc).
-
-```
-yay -S mpd-discord-rpc
-```
-
-### NixOS
-
-I have a derivation on the way. The `[replace]` tag is causing some issues right now.
 
 ## Configuration
 
