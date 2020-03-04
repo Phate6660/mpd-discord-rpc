@@ -2,7 +2,7 @@
 
 Displays your currently playing:
 
-song
+song<br>
 artist, album (date) 
 
 From MPD in Discord using Rich Presence. It includes support for multiple MPD hosts if, like me, you have more than one server you alternate between.
